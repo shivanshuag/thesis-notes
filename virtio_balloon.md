@@ -1,6 +1,6 @@
 # Virtio Balloon Code Walkthrough
 
-All the code is in the file `drivers/virtio/virtio_balloon.c`
+In KVM, all the code for balloon driver is in the file `drivers/virtio/virtio_balloon.c`
 
 Line 485 - `virtballoon_probe` function is run when the module is loaded.  
 Line 496 - It initializes a `virtio_balloon` structure. Look at its definition in the same file.  
@@ -12,3 +12,6 @@ Line 496 - It initializes a `virtio_balloon` structure. Look at its definition i
 384 - `balloon` function starts
 359-357 - thread will wait on the config_change and will come out of the loop when the conditions in the `if` statement become true.
 370-375 - calls `fill_balloon` or `leak_balloon` function based on the `diff`
+
+
+In qemu, the code for balloon dirver is inside `hw/virtio/virtio-balloon.c`
