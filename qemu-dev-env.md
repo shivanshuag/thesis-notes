@@ -20,3 +20,8 @@ Run the compile qemu using
 ```sh
 x86_64-softmmu/qemu-system-x86_64 -enable-kvm  -hda ../ubuntu.img -device virtio-balloon  -m 2G
 ```
+
+## Opening qemu monitor
+
+* The monitor is accessed from within QEMU by holding down the `Ctrl` and `Alt` keys (or whatever the "mouse grab" keystrokes are), and pressing `Shift-2`. Once in the monitor, `Shift-1` switches back to the guest OS
+* type `help` to list all commands and `help [command]` to get help for that command 
