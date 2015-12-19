@@ -22,7 +22,7 @@ Backends for tmem include `zcache` and `Xen tmem`. `Zcache` can be used in a non
 
  When kernel swaps a page, it assumes that the page will go to disk and may remain there for long time even if it is not used again as kernel assumes disk space is less costly and abundant. But if the page has gone to frontswap, it is taking up valuable space. To resolve this problem, `frontswap-self-shrinking` is used. When a guest is under normal memory pressure, this reclaims pages from tmem and brings it back to the kernel's RAM (HOW??).
 
- ### Conclusion
+### Conclusion
 
  Tmem does not seem to be useful during memory crunch on the host. But when memory is available on the host, then it may speed up by handling swapping if the balloon driver is slow to kicks-in and increase memory available or hard limit for ballooning has been reached on the guest. If there is no space available, then migration seems to be better option.
 

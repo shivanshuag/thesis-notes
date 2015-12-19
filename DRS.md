@@ -20,9 +20,11 @@
 * ~~VMWARE BALLOON~~ (turned out to be useless, as the code is closed source, only ABI's are exposed)
 * ~~Check out Memory Overcommittment Manager~~
 * ~~Install xen and try out ballooning~~
-* virtio balloon vs xen balloon
+* ~~virtio balloon vs xen balloon~~
+* ~~ESX memory overcommitment~~ https://labs.vmware.com/vmtj/memory-overcommitment-in-the-esx-server
+* Read VMWare DRS http://www.waldspurger.org/carl/papers/drs-vmtj-mar12.pdf
 * See how to get balloon driver stats
 
 # Resources
 
-* 2012 presentation on developments in memory management in KVM - http://www.linux-kvm.org/images/1/19/2012-forum-memory-mgmt.pdf .M
+* 2012 presentation on developments in memory management in KVM - http://www.linux-kvm.org/images/1/19/2012-forum-memory-mgmt.pdf
