@@ -16,7 +16,7 @@ There are ways to flush frontswap cache and cleancache i.e. remove/invalidate a 
 
 ### Backends
 
-Backends for tmem include `zcache` and `Xen tmem`. `Zcache` can be used in a non-virtualized environemnt. When the kernel has N pages to store but available memory to store them is less than N*pagesize, it can put them in tmem. Zcache compresses the pages before storing, so more pages can be stores. it usually rejects pages which have a low compression factor to avoid storing poorly compressible data.
+Backends for tmem include `zcache` and `Xen tmem`. `Zcache` can be used in a non-virtualized environment. When the kernel has N pages to store but available memory to store them is less than N*pagesize, it can put them in tmem. Zcache compresses the pages before storing, so more pages can be stored. It usually rejects pages which have a low compression factor to avoid storing poorly compressible data.
 
  The tmem backend in Xen utilizes spare hypervisor memory to store data, supports a large number of guests, and optionally implements both compression and deduplication (both within a guest and across guests) to maximize the volume of data that can be stored.
 

@@ -14,10 +14,10 @@ Sharing, Ballooning and Compression are opportunistic techniques and do not guar
 
 These states are determined based on ESX free memory.
 
-* High - 6% free memory in ESX. Uses page sharing, i.e. page sharing is active al all times
+* High - 6% free memory in ESX. Uses page sharing, i.e. page sharing is active at all times
 * Soft - 4% free memory. Page sharing and Ballooning. If a VM has consumed pages and is not using it, balloon driver reclaims the memory.
 * Hard - 2% free memory. Sharing, compression and swapping. ESX aggressively reclaims memory by swapping. If the page is shareable or compressible, do that instead of swapping.
-* Low - 1% free memory. sharing, compression, swapping and blocking. This is like hard state, bu ESX also prevents VMs from allocating more memory till ESX reaches hard state by memory reclamation.
+* Low - 1% free memory. sharing, compression, swapping and blocking. This is like hard state, but ESX also prevents VMs from allocating more memory till ESX reaches hard state by memory reclamation.
 
 ESX has a buffer of memory called `minfree`. It is in high state as long as ESX free memory is more than minfree. After this ballooning starts. If ballooning is not able to reclaim memory and take ESX back to `high` state, it enters the `hard` state where it starts swapping, and subseqently low state
 
