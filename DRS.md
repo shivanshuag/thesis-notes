@@ -40,6 +40,16 @@
 
 Problems with this algo - No consolidation
 
+## The Monitoring Service
+
+* There are four types of memory for a VM.
+  * maxmem - The maximum memory that can be allocated to a VM
+  * currentmem - Memory of the VM after ballooning
+  * usedmem - The amount of memory which is being used by the VM
+  * actualmem - The memory of the VM backed by physical RAM
+  Since on freeing memory, the VM has no way of letting the hypervisor know that it has free some memory, actualmem >= usedmem. Ballooning takes pages from the (actualmem - usedmem) first and hands them back. After that ballooning need not do anything, because it can just decrease the currentmem without having to free any pages. When the currentmem is set to < usedmem, then some more physical pages are freed and their content is swapped by the VM.
+* The service which handles ballooning first takes the `actualmem-usedmem` from each of the VMs. This should work in case of no overload. If there is overload, then calculate entitlement.
+
 # Progress
 
 * ~~read about irqfd and ioeventfd~~ http://blog.allenx.org/2015/07/05/kvm-irqfd-and-ioeventfd/
@@ -53,8 +63,15 @@ Problems with this algo - No consolidation
 * ~~Install xen and try out ballooning~~
 * ~~virtio balloon vs xen balloon~~
 * ~~ESX memory overcommitment~~ https://labs.vmware.com/vmtj/memory-overcommitment-in-the-esx-server
-* Read VMWare DRS http://www.waldspurger.org/carl/papers/drs-vmtj-mar12.pdf
-* See how to get balloon driver stats
+* ~~Read VMWare DRS http://www.waldspurger.org/carl/papers/drs-vmtj-mar12.pdf~~
+* ~~See how to get balloon driver stats~~ read guest-monitoring for commands on how to get stats.
+* ~~See how to use libvirt events according to https://github.com/wiedi/libvirt/blob/master/examples/domain-events/events-python/event-test.py and https://github.com/libvirt/libvirt/blob/master/include/libvirt/libvirt-domain.h~~
+* How much buffer cache to keep? Currently 50% is kept
+* ~~Check out https://raw.githubusercontent.com/pixelb/ps_mem/master/ps_mem.py~~ Gets the memory used by each process, but considers all processes of one type as one. So, no way to get per VM actualmem from it. Can be modified maybe?
+* ~~Get per vm actualmem~~
+* Find out a way to get qemu overhead for a VM. Will be useful in calculating idle memory.
+* Find a way to use available memory - https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/?id=34e431b0ae398fc54ea69ff85ec700722c9da773
+
 
 * Read E-PVM, a method for assigning scores on where to place a task (http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=877834) (http://gec.di.uminho.pt/discip/minf/ac0203/icca03/costappr_tpds2000.pdf) - convert the total usage of several heterogeneous resources,
 such as memory and CPU, into a single homogeneous “cost.” Jobs are then assigned to the machine where they have the lowest cost.
@@ -71,4 +88,6 @@ such as memory and CPU, into a single homogeneous “cost.” Jobs are then assi
 * http://henricasanova.github.io/papers/stillwell_ipdps12.pdf
 * https://hal.archives-ouvertes.fr/hal-00474721/document
 * http://weblab.ing.unimo.it/papers/cloudcomp09.pdf
+* cloudscale - http://www.e-wilkes.com/john/papers/2011-CloudScale-SoCC.pdf
 * sandpiper - https://people.cs.umass.edu/~arun/papers/sandpiper.pdf
+* EPVM - http://gec.di.uminho.pt/discip/minf/ac0203/icca03/costappr_tpds2000.pdf

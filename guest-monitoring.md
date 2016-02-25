@@ -178,7 +178,6 @@ virsh # qemu-monitor-command debian8 --pretty '{"execute":"qom-get",  "arguments
     "id": "libvirt-104"
 }
 
-
 virsh # qemu-monitor-command debian8 --pretty '{"execute":"qom-get",  "arguments": { "path": "/machine/peripheral/balloon0","property":"guest-stats"}}'{
     "return": {
         "stats": {
