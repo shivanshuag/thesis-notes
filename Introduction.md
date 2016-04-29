@@ -139,7 +139,7 @@ One of the requirements of the setup is live migration of VMs across compute nod
 
 In a typical Openstack deployment, every compute node manages its instances locally in a dedicated directory (for example, /var/lib/nova/instances/) but for shared storage live migration, this folder has to be in a centralized location and shared across all the compute nodes. We will share the /var/lib/nova/instances directory on controller node and mount it on all the compute nodes. This is an arbitrary choice and any other directory on any other node could have been chosen as well.
 
-_We have to make sure that the UID of the owner of this directory i.e. the 'nova' user is same on all the nodes. Otherwise there will be problems in the permissions of files in this directory. This can be ensured by changing the UID of the 'nova' user on all node to make them same. Refer to https://muffinresearch.co.uk/linux-changing-uids-and-gids-for-user/ for information on how to change UIDs in linux_
+_We have to make sure that the UID of the owner of this directory i.e. the 'nova' user is same on all the nodes. Otherwise there will be problems in the permissions of files in this directory. This can be ensured by changing the UID of the 'nova' user and 'libvirt-qemu' user on all node to make them same. Refer to https://muffinresearch.co.uk/linux-changing-uids-and-gids-for-user/ for information on how to change UIDs in linux_. Refer to the `Miscellaneous configurations` section on https://www.mirantis.com/blog/tutorial-openstack-live-migration-with-kvm-hypervisor-and-nfs-shared-storage/ for exact commands.
 
 Steps to install NFS server on Controller:
 
